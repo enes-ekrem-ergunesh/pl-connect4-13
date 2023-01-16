@@ -46,3 +46,11 @@ pub fn write(row: usize, col: usize, color: Element) {
       // e.g. log an error message or try again later
   }
 }
+
+pub fn dimensions() -> (usize, usize) {
+  if let Ok(matrix) = MATRIX.try_read() {
+      (matrix[0].len(), matrix.len())
+  } else {
+      (0, 0)
+  }
+}
