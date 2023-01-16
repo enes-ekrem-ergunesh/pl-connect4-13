@@ -8,11 +8,17 @@ pub mod matrix;
 fn main() {
     // crate::practice_main::practice_main::main(); // this is for practice purposes
     
-    println!("Data before: {}", matrix::read(0, 2));
+    // Create a matrix with the following dimensions
+    matrix::create_matrix(10, 12);
 
-    matrix::write(0, 2, matrix::Element::Red);
+    // Print the element in 9th row 5th column
+    println!("Data before: {}", matrix::read(9, 5));
 
-    println!("Data after: {}", matrix::read(0, 2));
+    // Update the element in 9th row 5th column with the new value
+    matrix::write(9, 5, matrix::Element::Yellow);
+
+    // Print the element in 9th row 5th column
+    println!("Data after: {}", matrix::read(9, 5));
     
     
 }

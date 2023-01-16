@@ -21,23 +21,28 @@ impl fmt::Display for Element {
 }
 
 lazy_static! {
-    static ref MATRIX: RwLock<[[Element; 7]; 6]> = RwLock::new([[Element::Empty; 7]; 6]);
+  static ref MATRIX: RwLock<Vec<Vec<Element>>> = RwLock::new(Vec::new());
+}
+
+pub fn create_matrix(rows: usize, cols: usize) {
+  let mut matrix = MATRIX.write().unwrap();
+  *matrix = vec![vec![Element::Empty; cols]; rows];
 }
 
 pub fn read(row: usize, col: usize) -> String {
-    if let Ok(matrix) = MATRIX.try_read() {
-        matrix[row][col].to_string()
-    } else {
-        "cannot acquire the lock".to_string()
-    }
+  if let Ok(matrix) = MATRIX.try_read() {
+      matrix[row][col].to_string()
+  } else {
+      "cannot acquire the lock".to_string()
+  }
 }
 
 pub fn write(row: usize, col: usize, color: Element) {
-    if let Ok(mut matrix) = MATRIX.try_write() {
-        matrix[0][col] = color;
-    }
-    // handle the case where the lock cannot be acquired
-    else {
-        // e.g. log an error message or try again later
-    }
+  if let Ok(mut matrix) = MATRIX.try_write() {
+      matrix[row][col] = color;
+  }
+  // handle the case where the lock cannot be acquired
+  else {
+      // e.g. log an error message or try again later
+  }
 }
