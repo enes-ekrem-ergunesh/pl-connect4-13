@@ -6,28 +6,21 @@ pub mod practice_main;
 fn main() {
     // crate::practice_main::practice_main::main(); // this is for practice purposes
 
-    // Create a matrix with the following dimensions
+    // Initialize the matrix with the following dimensions
     matrix::create_matrix(6, 7);
 
+    // Print the matrix to the terminal
     matrix::print();
     
-    algorithms::drop_token(2, matrix::Element::Red);
+    // Drop some tokens
     algorithms::drop_token(3, matrix::Element::Red);
-    algorithms::drop_token(3, matrix::Element::Red);
-    algorithms::drop_token(4, matrix::Element::Red);
-    algorithms::drop_token(4, matrix::Element::Red);
-    algorithms::drop_token(4, matrix::Element::Red);
-    algorithms::drop_token(5, matrix::Element::Red);
-    algorithms::drop_token(5, matrix::Element::Red);
-    algorithms::drop_token(5, matrix::Element::Red);
-    algorithms::drop_token(5, matrix::Element::Red);
-
     algorithms::drop_token(5, matrix::Element::Yellow);
     
+    // Print it again
     matrix::print();
 
-    let stat = algorithms::is_game_over(4);
-
-    // println!("status: {}", stat);
+    // Check if the game is over (enter the collumn number of last drop)
+    let status = algorithms::is_game_over(5);
+    println!("{}", status);
 
 }

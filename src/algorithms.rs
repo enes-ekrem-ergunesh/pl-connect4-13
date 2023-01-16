@@ -67,7 +67,6 @@
     let mut in_row = 1;
     // while next token is same with dropped token
     while i < cols && matrix::read(row, i) == matrix::read(row, col){
-      println!("row is {}", row);
       in_row += 1;
       i += 1;
     }
@@ -78,7 +77,7 @@
       in_row += 1;
       i -= 1;
     }
-    println!("in row (horizontal): {}", in_row);
+    // println!("DEBUG: in row (horizontal): {}", in_row);
 
     // If there are 4 or more in a row horizontally, print the winner and return true
     if in_row >= 4 {
@@ -102,7 +101,7 @@
       in_row += 1;
       i -= 1;
     }
-    println!("in row (vertical): {}", in_row);
+    // println!("DEBUG: in row (vertical): {}", in_row);
 
     // If there are 4 or more in a row vertically, print the winner and return true
     if in_row >= 4 {
@@ -130,7 +129,7 @@
       i -= 1;
       j -= 1;
     }
-    println!("in row (decrease): {}", in_row);
+    // println!("DEBUG: in row (decrease): {}", in_row);
 
     // If there are 4 or more in a row diagonally, print the winner and return true
     if in_row >= 4 {
@@ -158,7 +157,7 @@
       i -= 1;
       j += 1;
     }
-    println!("in row (increase): {}", in_row);
+    // println!("DEBUG: in row (increase): {}", in_row);
 
     // If there are 4 or more in a row diagonally, print the winner and return true
     if in_row >= 4 {
