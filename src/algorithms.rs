@@ -15,6 +15,8 @@
     // Check the first row
     if matrix::read(0, col) == "Empty" && matrix::read(1, col) != "Empty"{
       matrix::write(0, col, color);
+      // Write the drop to history
+      matrix::history_write(color, col);
     }
 
     // Check the middle rows
@@ -23,12 +25,16 @@
         continue;
       }
       matrix::write(i-1, col, color);
+      // Write the drop to history
+      matrix::history_write(color, col);
       break;
     }
 
     // Check the last row
     if matrix::read(rows-1, col) == "Empty"{
       matrix::write(rows-1, col, color);
+      // Write the drop to history
+      matrix::history_write(color, col);
     }
   }
 
