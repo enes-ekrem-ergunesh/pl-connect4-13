@@ -229,3 +229,69 @@ pub fn print() {
         println!("cannot acquire the lock");
     }
 }
+
+/**
+ * This function prints the matrix with Element values, it uses the Display trait
+ * implemented before to print the values with their names (Empty,Red,Yellow)
+ */
+pub fn display_board() {
+    if let Ok(matrix) = MATRIX.try_read() {
+        let (rows, cols) = dimensions();
+        println!("\n");
+        // println!("Matrix data: [");
+        
+        // print the column headers
+            print!("\t   ");
+        for col in 0..cols{
+            print!("{}   ", col+1)
+        }
+        print!("\n");
+
+
+        for row in 0..rows {
+            print!("\t | ");
+            for col in 0..cols {
+                let output = matrix[row][col].to_string();
+                if output == "Yellow" {
+                    print!("# | ");
+                } else if output == "Red" {
+                    print!("+ | ");
+                } else {
+                    print!("_ | ");
+                }
+            }
+            println!("");
+        }
+        // println!("]");
+        println!("");
+
+        // Prepare the history strings
+        let mut history_red = String::new();
+        let mut history_yellow = String::new();
+        for i in 0..history_len(){
+            let history_i = history_read(i);
+            if history_i.0 == "Red"{
+                history_red.push_str(&(history_i.1+1).to_string());
+                history_red.push_str(", ");
+            }
+            else if history_i.0 == "Yellow"{
+                history_yellow.push_str(&(history_i.1+1).to_string());
+                history_yellow.push_str(", ");
+            }
+        }
+        // Remove the last comma
+        if history_red.len()>1{history_red.remove(history_red.len()-2);}
+        if history_yellow.len()>1{history_yellow.remove(history_yellow.len()-2);}
+
+        // Print Red history
+        print!("\tRed (+) ->\t");
+        println!("{}", history_red);
+
+        // Print Yellow history
+        print!("\tYellow (#) ->\t");
+        println!("{}", history_yellow);
+        println!("\n");
+    } else {
+        println!("cannot acquire the lock");
+    }
+}
