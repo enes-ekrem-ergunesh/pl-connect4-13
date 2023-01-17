@@ -4,24 +4,15 @@ use std::fs;
 use crate::matrix;
 use crate::algorithms;
 
-/* Functions to store the data */
-// #[derive(Serialize, Deserialize, Debug, Copy)]
-// pub enum Token {
-//     Element {
-//         row: usize,
-//         col: usize,
-//         color: String,
-//     },
-// }
-
-pub fn prepare_matrix() -> Vec<(usize, usize)> {
+/* Store */
+fn prepare_matrix() -> Vec<(usize, usize)> {
     let mut elements: Vec<(usize, usize)> = Vec::new();
 
     elements.push(matrix::dimensions());
     elements
 }
 
-pub fn prepare_history() -> Vec<(String, usize)> {
+fn prepare_history() -> Vec<(String, usize)> {
     let mut elements: Vec<(String, usize)> = Vec::new();
 
     for i in 0..matrix::history_len() {
@@ -33,7 +24,7 @@ pub fn prepare_history() -> Vec<(String, usize)> {
     elements
 }
 
-pub fn prepare_json(name: &str) -> String {
+fn prepare_json(name: &str) -> String {
     let mut elements: Vec<(&str, Vec<(usize, usize)>, Vec<(String, usize)>)> = Vec::new();
     elements.push((name, prepare_matrix(), prepare_history()));
 
@@ -41,7 +32,7 @@ pub fn prepare_json(name: &str) -> String {
     json_data
 }
 
-pub fn write(filename: String, text: &str) {
+fn write(filename: String, text: &str) {
     let mut path: String = "./data/".to_string();
     path.push_str(&filename);
     let data = text;
@@ -53,9 +44,8 @@ pub fn store(name: &str){
   filename.push_str(".json");
   write(filename, &prepare_json(name))
 }
-/* Functions to store the data */
 
-/* Functions to load the data */
+/* Load */
 pub fn load(name: &str){
   let mut filename: String = name.to_string();
   filename.push_str(".json");
@@ -78,8 +68,7 @@ pub fn load(name: &str){
   }
 }
 
-
-pub fn read(filename: String) -> String {
+fn read(filename: String) -> String {
     let mut path: String = "./data/".to_string();
     path.push_str(&filename);
     let data = fs::read_to_string(path).expect("Unable to read file");

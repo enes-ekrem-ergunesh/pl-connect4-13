@@ -14,6 +14,8 @@ fn main() {
     let(rows, cols) = (6, 7);
     matrix::create_matrix(rows, cols);
     matrix::create_history(rows, cols);
+
+    storage::store("test1");
    
     // Drop some tokens
     let drop_to = 4;
