@@ -1,6 +1,7 @@
 use lazy_static::lazy_static;
 use std::fmt;
 use std::sync::RwLock;
+use serde::{Serialize, Deserialize};
 
 /**
  * #[derive(Clone, Copy)] attribute is used to allow the enum to be copied and cloned.
@@ -11,7 +12,7 @@ use std::sync::RwLock;
  *     - Red: representing a cell with red token
  *     - Yellow: representing a cell with yellow token * 
  */
-#[derive(Clone, Copy)]
+#[derive(Serialize, Deserialize, Clone, Copy)]
 pub enum Element {
     Empty,
     Red,
@@ -82,6 +83,7 @@ pub fn write(row: usize, col: usize, color: Element) {
 
 /**
  * This function returns the number of rows and columns in the matrix as a tuple
+ * returns: (rows, columns)
  */
 pub fn dimensions() -> (usize, usize) {
     if let Ok(matrix) = MATRIX.try_read() {
