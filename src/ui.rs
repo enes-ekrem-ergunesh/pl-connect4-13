@@ -78,14 +78,20 @@ pub(crate) fn ask_user(count: i8, mut game_array: & mut [[char;6];7]) -> i8{
       .read_line(&mut input_text)
       .expect("failed to read from stdin");
 
-      if isRedPlayer {
+       if count % 2 == 1{
         let mut drop_to = input_text.trim().parse().unwrap();
         drop_to -= 1;
-
         algorithms::drop_token(drop_to, matrix::Element::Red);
         matrix::display_board();
         algorithms::is_game_over(drop_to);
+      }else {
+        let mut drop_to = input_text.trim().parse().unwrap();
+        drop_to -= 1;
+        algorithms::drop_token(drop_to, matrix::Element::Yellow);
+        matrix::display_board();
+        algorithms::is_game_over(drop_to);
       }
+
 
   //Match statements are like switch statements.
   match input_text.trim().parse::<usize>() {
